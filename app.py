@@ -11,6 +11,8 @@ class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100))
     complete = db.Column(db.Boolean)
+    category = db.Column(db.String(100))
+    note = db.Column(db.String(1000))
 
 
 @app.route('/')
@@ -25,10 +27,14 @@ def index():
 def add():
     # add new item
     title = request.form.get("title")
-    new_todo = Todo(title=title, complete=False)
+    category = request.form.get("category")
+    note = request.form.get("note")
+    new_todo = Todo(title=title, category=category, note=note, complete=False)
     db.session.add(new_todo)
     db.session.commit()
     return redirect(url_for("index"))
+
+
 
 @app.route("/update/<int:todo_id>")
 def update(todo_id):
