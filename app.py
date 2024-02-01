@@ -34,6 +34,15 @@ def add():
     db.session.commit()
     return redirect(url_for("index"))
 
+def search_cat(category):
+    #search by title
+    search_category = request.form.get("search")
+    if search_category:
+        search_results = Todo.query.filter(db.or_(Todo.category.ilike(f"%{search_term}%")))
+    else:
+        search_results = Todo.query.all()
+
+
 
 
 @app.route("/update/<int:todo_id>")

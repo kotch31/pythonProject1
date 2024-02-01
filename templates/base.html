@@ -22,9 +22,21 @@
                 <p></p>
                 <input type="text" name="note" placeholder="Enter Note...">
                 <br>
+                <p></p>
                 <button class="ui blue button" type="submit">Add</button>
             </div>
         </form>
+        <p></p>
+        <hr>
+        <p></p>
+        <form class="ui form" action="/search" method="post">
+            <div class="field">
+                    <input type="text" name="search" placeholder="Enter Category...">
+                    <p></p>
+                    <button class="ui grey button" type="submit">Search</button>
+            </div>
+        </form>
+        <p></p>
         <hr>
         {% for todo in todo_list %}
         <div class="ui segment">
