@@ -34,13 +34,15 @@ def add():
     db.session.commit()
     return redirect(url_for("index"))
 
-def search_cat(category):
+@app.route("/search", methods=["GET", "POST"])
+def search_cat():
     #search by title
-    search_category = request.form.get("search")
+    search_category = request.args.get("search")
     if search_category:
-        search_results = Todo.query.filter(db.or_(Todo.category.ilike(f"%{search_term}%")))
+        search_results = Todo.query.filter(Todo.category.ilike(f"%{search_category}%")).all()
     else:
         search_results = Todo.query.all()
+    return render_template('base.html', todo_list=search_results)
 
 
 
