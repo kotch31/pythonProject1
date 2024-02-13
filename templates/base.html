@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+<!--sets text language to english-->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -8,12 +9,15 @@
     <title>Todo App</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <!--sets up style sheet for website-->
 </head>
 <body>
     <div style="margin-top: 50px;" class="ui container">
+        <!--centers title-->
         <h1 class="ui center aligned header">To Do App</h1>
 
         <form class="ui form" action="/add" method="post">
+            <!--/add calls add function-->
             <div class="field">
                 <label>Todo Title</label>
                 <input type="text" name="title" placeholder="Enter Todo...">
@@ -21,17 +25,36 @@
                 <input type="text" name="category" placeholder="Enter Category...">
                 <p></p>
                 <input type="text" name="note" placeholder="Enter Note...">
+                <p></p>
+                <input type="text" name="due" placeholder="MM/DD/YYYY"
+                <!--input command to put respective data into database-->
                 <br>
+                <!--makes page break-->
                 <p></p>
                 <button class="ui blue button" type="submit">Add</button>
+                <!--blue "save" button-->
+            </div>
+        </form>
+        <p></p>
+        <!--paragraph-->
+        <hr>
+        <!--header-->
+        <p></p>
+        <form class="ui form" action="/searchcat" method="GET">
+            <!--/search calls search function-->
+            <div class="field">
+                    <input type="text" name="search_cat" placeholder="Enter Category...">
+                    <p></p>
+                    <button class="ui grey button" type="submit">Search</button>
             </div>
         </form>
         <p></p>
         <hr>
         <p></p>
-        <form class="ui form" action="/search" method="GET">
+        <form class="ui form" action="/searchdue" method="GET">
+            <!--/search calls search function-->
             <div class="field">
-                    <input type="text" name="search" placeholder="Enter Category...">
+                    <input type="text" name="search_date" placeholder="Enter MM/DD/YYYY">
                     <p></p>
                     <button class="ui grey button" type="submit">Search</button>
             </div>
@@ -42,14 +65,19 @@
         <div class="ui segment">
             <p class="ui big header"> {{ todo.id }} | {{ todo.title }} </p>
             <p class="ui big header"> Category: {{ todo.category }} </p>
+            <p class="ui big header"> Due: {{ todo.due }} </p>
             <p class="ui big header"> Note: {{ todo.note }} </p>
             {% if todo.complete == False %}
                 <span class="ui gray label">Not Complete</span>
             {% else %}
                 <span class="ui green label">Completed</span>
             {% endif %}
+            <!--displays tittle category note completion status-->
             <a class="ui blue button" href="/update/{{ todo.id }}">Update</a>
+            <!--href runs update function-->
             <a class="ui red button" href="/delete/{{ todo.id }}">Delete</a>
+            <!--href runs delete function-->
+            <!--blue update stats button and red delets button-->
         </div>
         {% endfor %}
     </div>
